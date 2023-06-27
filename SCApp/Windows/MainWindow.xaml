@@ -1,0 +1,188 @@
+﻿<Window x:Class="SCApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SCApp"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fa="http://schemas.fontawesome.com/icons/"
+        mc:Ignorable="d"
+        Title="Регистрация" Height="455" Width="640" ResizeMode="NoResize">
+    
+    <ScrollViewer>
+        <StackPanel Margin="20">
+            
+            <Button Margin="20,5,0,0" Content="Открыть таблицу абитуриентов" Click="ButtonOpen_Click" Style="{DynamicResource MaterialDesignFlatLightBgButton}" />
+            <Label Content="Регистрация абитуриента" FontSize="20" Margin="0,10,0,20" HorizontalAlignment="Center"/>
+            <TextBox x:Name="surname" 
+                     materialDesign:HintAssist.Hint="Фамилия" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Text="{Binding Surname, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                     PreviewTextInput="surname_PreviewTextInput"/>
+
+            <TextBox x:Name="name" 
+                     materialDesign:HintAssist.Hint="Имя" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                    PreviewTextInput="name_PreviewTextInput"/>
+
+            <TextBox x:Name="patronymic" 
+                     materialDesign:HintAssist.Hint="Отчество" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Text="{Binding Patronymic, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                     PreviewTextInput="patronymic_PreviewTextInput"/>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Пол" Margin="0,10,0,0" />
+                <ComboBox  x:Name="gender" Width="100" HorizontalAlignment="Left" SelectedItem="{Binding Gender, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  >
+                    <ComboBoxItem Content="Мужской" />
+                    <ComboBoxItem Content="Женский"/>
+                </ComboBox>
+            </StackPanel>
+
+            <TextBox x:Name="dtBirth" materialDesign:HintAssist.Hint="Дата рождения" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding DtBirth, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox x:Name="fullYear" materialDesign:HintAssist.Hint="Полных лет" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Text="{Binding FullYear, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="0,0,0,10">
+                <CheckBox  Content="Не является гражданином РФ" x:Name="сitizenshipСheck" VerticalAlignment="Bottom" />
+                <Label Content="Выбор гражданства:" VerticalAlignment="Bottom" Margin="10,0,0,-2" >
+                    <Label.ToolTip>
+                        <TextBlock Text="Если нужное гражданство отсутсвует в списке введите его в поле 'Ввод нужной страны', которое находится в конце списка" />
+                    </Label.ToolTip>
+
+                </Label>
+                <ComboBox x:Name="citizenship" Width="300" Margin="5" SelectedItem="{Binding Сitizenship, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="Россия"/>
+                    <ComboBoxItem Content="Беларусь"/>
+                    <ComboBoxItem Content="Казахстан"/>
+                    <ComboBoxItem Content="Кыргызстан"/>
+                    <ComboBoxItem Content="Молдова"/>
+                    <ComboBoxItem Content="Армения"/>
+                    <ComboBoxItem Content="Азербайджан"/>
+                    <TextBox materialDesign:HintAssist.Hint="Ввод нужной страны"/>
+                </ComboBox>
+            </StackPanel>
+            <TextBox x:Name="foreignСitizen" Text="Иностранный гражданин" Visibility="Collapsed" />
+            <StackPanel>
+                <TextBox x:Name="subject" TextChanged="TextBox_TextChanged" 
+                         materialDesign:HintAssist.Hint="Субъект" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                         Text="{Binding Subject, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                <ComboBox x:Name="regionKostroma" 
+                          Visibility="Collapsed" 
+                          SelectedItem="{Binding Region, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="Нейский р-н, г. Нея" />
+                    <ComboBoxItem Content="Антроповский р-н, г. Антропово" />
+                    <ComboBoxItem Content="Буйсикй р-н, г. Буй" />
+                    <ComboBoxItem Content="Вохоский р-н, г. Вохма" />
+                    <ComboBoxItem Content="Галический р-н, г. Галич" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Закончил классов" Margin="0,10,0,0"/>
+                <ComboBox Width="500" HorizontalAlignment="Left"   
+                          Text="{Binding Class, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                          x:Name="classend">
+                    <ComboBoxItem Content="9"/>
+                    <ComboBoxItem Content="11"/>
+                    <TextBox materialDesign:HintAssist.Hint="Указать учреждение" />
+                </ComboBox>
+            </StackPanel>
+            <TextBox x:Name="certificateScore" 
+                     materialDesign:HintAssist.Hint="Средний балл аттестата"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Text="{Binding Score, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <TextBox x:Name="snils" 
+                     materialDesign:HintAssist.Hint="СНИЛС" 
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Text="{Binding Snils, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <Label Content="Форма обучения" Margin="0,10,0,0"/>
+            <ComboBox Width="640" HorizontalAlignment="Left"
+                      Text="{Binding Education, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      x:Name="education">
+                <ComboBoxItem Content="Бюджет"/>
+                <ComboBoxItem Content="По договору об оказании платных образовательных услуг"/>
+            </ComboBox>
+            <Label Content="Специальность" Margin="0,10,0,0" />
+            <ComboBox SelectedItem="{Binding Speciality, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                      x:Name="speciality">
+                <ComboBoxItem Content="Архитектура"/>
+                <ComboBoxItem Content="Гидрогеология и инженерная геология»"/>
+                <ComboBoxItem Content="Информационные системы и программирование"/>
+                <ComboBoxItem Content="Строительство и эксплуатация зданий и сооружений"/>
+                <ComboBoxItem Content="Разработка электронных устройств и систем"/>
+                <ComboBoxItem Content="Экономика и бухгалтерский учет» (по отраслям)"/>
+            </ComboBox>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Label Content="Наличие документов об инвалидности" Margin="0,10,0,0" />
+                <ComboBox Width="100"
+                          x:Name="disability"
+                          HorizontalAlignment="Left"
+                          Margin="0,10,0,0"
+                          Text="{Binding Enrollment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="Да"/>
+                    <ComboBoxItem Content="Нет"/>
+                </ComboBox>
+            </StackPanel>
+
+            <Button Content="Загрузить справку об инвалидности" 
+                    Click="loadDisDocButton_Click" 
+                    Cursor="Hand" 
+                    Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Left"/>
+            <Image x:Name="displayDisabilityDoc"
+                   Stretch="Uniform" 
+                   HorizontalAlignment="Center"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Label Content="Наличие документов о сиротстве" Margin="0,10,0,0" />
+                <ComboBox Width="100"
+                          x:Name="ward"
+                          HorizontalAlignment="Left"
+                          Margin="0,10,0,0"
+                          Text="{Binding Enrollment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="Да"/>
+                    <ComboBoxItem Content="Нет"/>
+                </ComboBox>
+            </StackPanel>
+            <Button Content="Загрузить документы о сиротстве" Click="loadOrhDocButton_Click" Cursor="Hand" Style="{DynamicResource MaterialDesignFlatButton}" HorizontalAlignment="Left"/>
+            <Image x:Name="displayOrphanhoodDoc" Stretch="Uniform" HorizontalAlignment="Center"/>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Label Content="Оригинал аттестата" Margin="0,10,0,0" />
+                <ComboBox Width="100"
+                          x:Name="certi"
+                          HorizontalAlignment="Left"
+                          Margin="0,10,0,0"
+                          Text="{Binding Enrollment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="Да"/>
+                    <ComboBoxItem Content="Нет"/>
+                </ComboBox>
+            </StackPanel>
+            <Button Content="Загрузить аттестат"
+                    Click="loadCerButton_Click" Cursor="Hand" 
+                    Style="{DynamicResource MaterialDesignFlatButton}" 
+                    HorizontalAlignment="Left"/>
+            <Image x:Name="displayСertificateDoc" 
+                   Stretch="Uniform" 
+                   HorizontalAlignment="Center"
+                   />
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
+                <Label Content="Зачисление" Margin="0,10,0,0" />
+                <ComboBox Width="100"
+                          x:Name="enrollment"
+                          HorizontalAlignment="Left"
+                          Margin="0,10,0,0"
+                          Text="{Binding Enrollment, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                    <ComboBoxItem Content="Да"/>
+                    <ComboBoxItem Content="Нет"/>
+                </ComboBox>
+            </StackPanel>
+            <TextBox x:Name="year" 
+                     materialDesign:HintAssist.Hint="Год поступления"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" 
+                     Text="{Binding Year, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <Button Content="Добавить" Margin="10" Click="ButtonEn_Click" Style="{DynamicResource MaterialDesignFlatLightBgButton}"/>
+            <Button Content="Далее"  Margin="10" Click="ButtonOpen_Click" Style="{DynamicResource MaterialDesignFlatLightBgButton}"/>
+            
+        </StackPanel>
+    </ScrollViewer>
+</Window>
